@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AEM_UTC</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_tarea">Tarea</string>
+    <string name="title_activity_materia">Materia</string>
+    <string name="title_activity_docente">Docente</string>
+    <string name="title_activity_horario">Horario</string>
+    <string name="title_activity_ayuda">Ayuda</string>
+    <string name="title_activity_listado_materias">Listado_materias</string>
+
+</resources>
