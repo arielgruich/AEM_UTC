@@ -50,7 +50,6 @@ public class Tarea extends Activity  implements OnClickListener, android.view.Vi
 	private SQLiteDatabase BBDD;
 	private static final String nombreBBDD="BB_TAREAS";
 	private static final String tablaTarea="create table if not exists tbl_tareas(_id integer primary key autoincrement, titulo_tarea text, descripcion_tarea text,fecha_tarea text,docente_tarea text,recordatorio text)";
-
 	// alerta
 	private static final int ALERTA_ID=1;
 	@Override
@@ -128,16 +127,21 @@ public void Actualizar_tarea_vista(View v){
 			String fect=txt_fecha_tarea.getText().toString();
 			String matd=txt_nombre_materia.getText().toString();
 			String rec=recordatorio.getText().toString();
-			if(ingresar_tarea_BBDD(tit, desc, fect, matd, rec)){
+			if(tit.equals("")&&desc.equals("")){
+				Toast.makeText(getApplicationContext(), "Debe Ingresar Datos ", Toast.LENGTH_SHORT).show();
+			}
+			else
+			if(ingresar_tarea_BBDD(tit, desc, fect, matd)){
 				Toast.makeText(getApplicationContext(), "Tarea ingresada correctamente ", Toast.LENGTH_SHORT).show();
-					
+					limpiar_cajas();
+					buscar_tarea_BBDD();
 			}else{
 				Toast.makeText(getApplicationContext(), "Error al ingresar materia", Toast.LENGTH_SHORT).show();
 				
 			}
 			
 			}
-		public boolean ingresar_tarea_BBDD(String titulo_tarea,String descripcion_tarea, String fecha_tarea, String docente_tarea,String recorad){
+		public boolean ingresar_tarea_BBDD(String titulo_tarea,String descripcion_tarea, String fecha_tarea, String docente_tarea){
 			ContentValues valores_tarea=new ContentValues();
 			valores_tarea.put("titulo_tarea", titulo_tarea);
 			valores_tarea.put("descripcion_tarea",descripcion_tarea);
@@ -178,7 +182,11 @@ public void Actualizar_tarea_vista(View v){
 			});
 			}
 		public void buscar_tarea(View v){
-		buscar_tarea_BBDD();
+			Toast.makeText(getApplicationContext(), "Listado de tareas", Toast.LENGTH_SHORT).show();
+				buscar_tarea_BBDD();
+				limpiar_cajas();
+				//Intent lt=new Intent(this,Listado_tarea.class);
+				//startActivity(lt);
 			
 		}
 		///editar tarea
@@ -191,9 +199,11 @@ public void Actualizar_tarea_vista(View v){
 		String rect=recordatorio.getText().toString();
 		if(editar_tareaBBDD(idt, titt, dest, fect, doct, rect)){
 			Toast.makeText(getApplicationContext(), "Se edito correctamente La tarea", Toast.LENGTH_SHORT).show();
+			limpiar_cajas();
+			buscar_tarea_BBDD();
 		}
 		else{
-			Toast.makeText(getApplicationContext(), "Error al intentar editar tarea adios", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), "Error al intentar editar tarea", Toast.LENGTH_SHORT).show();
 		}
 		
 		}
@@ -212,6 +222,8 @@ public void Actualizar_tarea_vista(View v){
 			int idt=Integer.parseInt(txt_id_tarea.getText().toString());
 			if (eliminar_tareaBBDD(idt)){
 				Toast.makeText(getApplicationContext(), "tarea eliminada correctamente ", Toast.LENGTH_SHORT).show();
+				limpiar_cajas();
+				buscar_tarea_BBDD();
 			}else{
 				Toast.makeText(getApplicationContext(), "cerror al intentar eliminar tarea ", Toast.LENGTH_SHORT).show();
 			}
@@ -231,14 +243,20 @@ public void Actualizar_tarea_vista(View v){
 					.setContentText(txt_descripcion_tarea.getText().toString())
 					.setContentInfo("Fecha de entrega"+txt_fecha_tarea.getText().toString())
 					.setTicker("Recordatorio ...!!!!!");
-					Intent notificacionINtent=new Intent(this,Tarea.class);
-					PendingIntent conINtent=
-							PendingIntent.getActivity(Tarea.this,0,notificacionINtent,0);
+					Intent notificacionINtent=new Intent(this,Listado_tarea.class);
+					PendingIntent conINtent=	PendingIntent.getActivity(Tarea.this,0,notificacionINtent,0);
 					mBuilder.setContentIntent(conINtent);
 				NotificationManager mnm=(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
 				mnm.notify(ALERTA_ID,mBuilder.build());
 		}
-
+		public void limpiar_cajas(){
+				txt_id_tarea.setText("");
+				txt_titulo_tarea.setText("");
+				txt_descripcion_tarea.setText("");
+				txt_fecha_tarea.setText("");
+				txt_nombre_materia.setText("");
+				recordatorio.setText("");
+		}
 
 
 		 @Override

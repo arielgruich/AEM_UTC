@@ -67,13 +67,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#81F781"
-                android:textSize="12dp"
+                	android:textSize="12dp"
                     android:hint="Fecha Entrega : " />
 
                 <TextView
                     android:id="@+id/txt_fecha_tarea"
                     android:layout_width="wrap_content"
-                    android:textColor="#81F781"
+                    android:textColor="#0000FF"
                 android:textSize="12dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.73" />
@@ -94,19 +94,26 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:hint="Materia :" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
                 <TextView
                     android:id="@+id/txt_materia_tareas"
-                    android:textColor="#81F781"
-                android:textSize="12dp"
-                    android:layout_width="116dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="147dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#0000FF"
+                    android:textSize="12dp" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="39dp"
                     android:orientation="vertical" >
 
@@ -117,20 +124,21 @@
 
                         <Spinner
                             android:id="@+id/lista_docente_tarea"
-                            android:layout_width="135dp"
+                            android:layout_width="110dp"
                             android:layout_height="match_parent"
+                            android:layout_weight="0.92"
                             android:background="@drawable/spiner"
-                            android:popupBackground="@drawable/lista" />
+                            android:popupBackground="@drawable/lista"
+                            android:scrollbarSize="10dp" />
 
                         <ImageButton
                             android:id="@+id/imageButton5"
-                            android:layout_width="match_parent"
+                            android:layout_width="15dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
+                            android:layout_weight="0.72"
                             android:background="#0FECFF"
                             android:onClick="Actualizar_tarea_vista"
                             android:src="@android:drawable/arrow_down_float" />
-
                     </LinearLayout>
 
                 </LinearLayout>
@@ -215,7 +223,7 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/h"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 

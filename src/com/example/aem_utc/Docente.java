@@ -64,9 +64,8 @@ private static final String tablaDocente="create table if not exists tbl_docente
 	public void guardar_docente(View a){
 		String nom=txt_nombre_docente.getText().toString();
 		String ema=txt_email_docente.getText().toString();
-		if(nom.equals("")){			
+		if(nom.equals("")&&ema.equals("")){			
 			Toast.makeText(getApplicationContext(),"Ingrese Nombre del"+"\n"+"del Docente Porfavor",Toast.LENGTH_SHORT).show();
-			buscar_docente_BBDD();
 			//txt_id_docente.setBackgroundColor(Color.RED);
 		}else
 		if(almacenar_docente_BBDD(nom,ema)){
@@ -150,9 +149,10 @@ private static final String tablaDocente="create table if not exists tbl_docente
 		if(borrarr_docente_BBDD(idd)){
 			Toast.makeText(getApplicationContext(), "Docente eliminado correctamente", Toast.LENGTH_SHORT).show();
 			limpiar_cajas_texto();
+			buscar_docente_BBDD();
 		}else{
 			Toast.makeText(getApplicationContext(), "error al eliminar docente", Toast.LENGTH_SHORT).show();
-			buscar_docente_BBDD();
+			
 		}
 	}
 	public boolean borrarr_docente_BBDD(int id){

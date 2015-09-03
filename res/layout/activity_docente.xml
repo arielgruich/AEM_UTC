@@ -33,13 +33,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="#0000FF"
-                android:textSize="12dp"
                 android:ems="10"
-                android:hint="Nombre de Docente" >
-
-                <requestFocus />
-            </EditText>
+                 android:textColor="#0000FF"
+                android:textSize="12dp"
+                android:hint="Nombre Docente"
+                android:inputType="textPersonName" />
 
             <Space
                 android:layout_width="match_parent"
@@ -118,7 +116,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/h"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

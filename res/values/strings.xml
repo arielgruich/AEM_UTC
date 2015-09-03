@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">AEM_UTC</string>
+    <string name="app_name">Agenda UTC</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_tarea">Tarea</string>
@@ -9,6 +9,9 @@
     <string name="title_activity_docente">Docente</string>
     <string name="title_activity_horario">Horario</string>
     <string name="title_activity_ayuda">Ayuda</string>
-    <string name="title_activity_listado_materias">Listado_materias</string>
+    <string name="title_activity_listado_materias">Listado materias</string>
+    <string name="title_activity_horarrio">Horario</string>
+    <string name="title_activity_nuevo_hoarario">Nuevo horario</string>
+    <string name="title_activity_listado_tarea">Listado_tarea</string>
 
 </resources>

@@ -40,12 +40,7 @@ public class Principal extends TabActivity{
 					tab_horario.setIndicator("Horario");
 					 tab_horario.setContent(new Intent(this,Horario.class));
 					 tabhost.addTab(tab_horario);
-					 //menu ayuda
 
-						TabSpec tab_ayuda=tabhost.newTabSpec("menu ayuda");
-						tab_ayuda.setIndicator("?");
-						 tab_ayuda.setContent(new Intent(this,Ayuda.class));
-						 tabhost.addTab(tab_ayuda);
 			
 		 
 		

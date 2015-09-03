@@ -46,6 +46,18 @@
             android:name=".Listado_materias"
             android:label="@string/title_activity_listado_materias" >
         </activity>
+        <activity
+            android:name=".Horario"
+            android:label="@string/title_activity_horarrio" >
+        </activity>
+        <activity
+            android:name=".Nuevo_horario"
+            android:label="@string/title_activity_nuevo_hoarario" >
+        </activity>
+        <activity
+            android:name=".Listado_tarea"
+            android:label="@string/title_activity_listado_tarea" >
+        </activity>
     </application>
 
 </manifest>

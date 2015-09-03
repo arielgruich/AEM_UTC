@@ -38,9 +38,8 @@ private static final String tablaMateria="create table if not exists tbl_materia
 		setContentView(R.layout.activity_materia);
 		txt_id_materia=(TextView)findViewById(R.id.txt_id_materia);
 		txt_nombre_materia=(EditText)findViewById(R.id.txt_nombre_materia);
-		txt_m=(TextView)findViewById(R.id.txt_docente_materia);
-		txt_docente_materia=(TextView)findViewById(R.id.txt_abre_materia);
 		txt_alias_materia=(EditText)findViewById(R.id.txt_alias_materia);
+		txt_docente_materia=(TextView)findViewById(R.id.txt_abre_materia);		
 		lista_docente_materia=(Spinner)findViewById(R.id.lista_docente_materia);
 		lista_materia=(ListView)findViewById(R.id.lista_materia);
 		crear();
@@ -49,11 +48,11 @@ private static final String tablaMateria="create table if not exists tbl_materia
 		final ArrayAdapter<String>adapter=new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_item,fil2);
 		lista_docente_materia.setAdapter(adapter);
 	}
+	
 
 ////boton actualizar en vista para cargar Docente
 	public void actualizar_materia_vista(View v){
 		final ArrayList<String>fil=new ArrayList<String>();
-	
 		Cursor cursor=BBDD.rawQuery("select *from tbl_docentes;",null);
 		if(cursor!=null){
 			cursor.moveToFirst();
@@ -63,11 +62,9 @@ private static final String tablaMateria="create table if not exists tbl_materia
 		}
 		
 		final ArrayAdapter<String>adapter=new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_item,fil);
-			lista_docente_materia.setAdapter(adapter);
-		
+			lista_docente_materia.setAdapter(adapter);		
 		lista_docente_materia.setOnItemSelectedListener(new  AdapterView.OnItemSelectedListener() { 
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) { 
-        
         Cursor cu=BBDD.rawQuery("select nombre_docente from tbl_docentes;",null);
 		cu.moveToPosition(i);
 		txt_docente_materia.setHint(String.valueOf(cu.getString(0)));
@@ -94,18 +91,22 @@ private static final String tablaMateria="create table if not exists tbl_materia
 	
 
 	//ingresar materia en BBDD
-	public void ingresar_materia(View a){
+	public void ingresar_materia(View v){
 		String nomm=txt_nombre_materia.getText().toString();
 		String aliasm=txt_alias_materia.getText().toString();
-		String docem=txt_docente_materia.getText().toString();
+		String docem=txt_docente_materia.getText().toString();		
+		if(nomm.equals("")&&aliasm.equals("")&&docem.equals("")){
+			Toast.makeText(getApplicationContext(),"Debe ingresar datos", Toast.LENGTH_SHORT).show();
+		}
+		else
 		if(almacenar_materia_BBDD(nomm, aliasm, docem)){
 			Toast.makeText(getApplicationContext(),"Registro de Materia exitosa",Toast.LENGTH_SHORT).show();
 			limpiar_cajasdetextto_materia();
 			buscar_materia_BBDD();
 			
-		}else{
+		}
+		else{
 			Toast.makeText(getApplicationContext(),"Error al Intentar Registrar Materia",Toast.LENGTH_SHORT).show();
-			
 		}
 		
 	}
@@ -116,6 +117,7 @@ private static final String tablaMateria="create table if not exists tbl_materia
 	 valores_materia.put("docente_materia",docente_materia);
 	 return (BBDD.insert("tbl_materias",null,valores_materia)>0);	 
 	}
+	
 	//consultar materias y almacenar en la lista
 	final ArrayList<String>fil3=new ArrayList<String>();
 	public void buscar_materia_BBDD(){
@@ -131,22 +133,21 @@ private static final String tablaMateria="create table if not exists tbl_materia
 		lista_materia.setAdapter(adapter);
 		//click en una lista y almacenar en las cajas de texto
 		lista_materia.setOnItemClickListener(new OnItemClickListener() {
-	
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,	int position, long id) {
-				// TODO Auto-generated method stub
 				Cursor cu=BBDD.rawQuery("select * from tbl_materias;",null);
 				cu.moveToPosition(position);
 				txt_id_materia.setText(String.valueOf(cu.getLong(0)));
 				txt_nombre_materia.setText(String.valueOf(cu.getString(1)));
 				txt_alias_materia.setText(String.valueOf(cu.getString(2)));
-				txt_docente_materia.setText(String.valueOf(cu.getString(3)));
+				txt_docente_materia.setHint(String.valueOf(cu.getString(3)));
 				
 			}
 		});
 		}
 	
 	public void buscar_materia(View a){
+		Toast.makeText(getApplicationContext(), "Lista completa de Materias", Toast.LENGTH_SHORT).show();
 			buscar_materia_BBDD();
 		}
 	//edittar materia
@@ -154,13 +155,13 @@ public void editar_materia(View a){
 		int id=Integer.parseInt(txt_id_materia.getText().toString());
 		String mat=txt_nombre_materia.getText().toString();
 		String ali=txt_alias_materia.getText().toString();
-		String docm=txt_docente_materia.getText().toString();
+		String docm=txt_docente_materia.getHint().toString();
 		if (actualizar_materia_BBDD(id, mat, ali, docm)){
-			Toast.makeText(getApplicationContext(), "DATOS MATERIA EDITADO CORRECTAMENTE", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), "Datos de materia"+"Editado correctamente", Toast.LENGTH_SHORT).show();
 			buscar_materia_BBDD();
 			limpiar_cajasdetextto_materia();
 		}else{
-			Toast.makeText(getApplicationContext(), "error al editar materia", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), "Error al editar materia", Toast.LENGTH_SHORT).show();
 		}
 	}
 	public boolean actualizar_materia_BBDD(int id,String n_materia,String a_materia, String d_materia){
@@ -189,7 +190,7 @@ public void editar_materia(View a){
 		txt_id_materia.setText("");
 		txt_nombre_materia.setText("");
 		txt_alias_materia.setText("");
-		txt_docente_materia.setText("");
+		txt_docente_materia.setHint("");
 		
 	}
 
